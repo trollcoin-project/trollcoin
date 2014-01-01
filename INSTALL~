@@ -9,15 +9,3 @@ the intended-for-services, no-graphical-interface, reference
 implementation of Trollcoin.
 
 [Step-by-step qt build on Ubuntu 12.04+]
-
-apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev git
-
-git clone https://github.com/trollcoin-project/trollcoin.git
-
-cd trollcoin
-
-qmake
-
-make
-
-Executeable will be called 'trollcoin-qt'
