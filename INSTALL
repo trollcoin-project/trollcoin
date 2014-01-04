@@ -10,9 +10,21 @@ implementation of Trollcoin.
 
 [Step-by-step qt build on Ubuntu 12.04+]
 
-apt-get install build-essential libboost-all-dev libdb4.8-dev libdb++-dev qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev git
+(Install Dependencies)
+
+sudo apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev git
+
+sudo apt-get install libboost-all-dev
+
+sudo apt-get install libdb4.8-dev
+
+sudo apt-get install libdb++-dev
+
+(Download Source)
 
 git clone https://github.com/trollcoin-project/trollcoin.git
+
+(Build)
 
 cd trollcoin
 
