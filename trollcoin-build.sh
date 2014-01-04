@@ -22,11 +22,11 @@ else
 fi
 
 echo 'Installing dependencies...'
-apt-get update
-apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev
-apt-get install libboost-all-dev
-apt-get install libdb4.8-dev
-apt-get install libdb++-dev
+apt-get -y update
+apt-get -y install qt4-qmake libqt4-dev build-essential libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libdb++-dev libminiupnpc-dev
+apt-get -y install libboost-all-dev
+apt-get -y install libdb4.8-dev
+apt-get -y install libdb++-dev
 
 echo 'Building trollcoind'
 cd $SCRIPTDIR/src
