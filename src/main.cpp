@@ -31,7 +31,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0xa74d69075bb7bca24cb725582c158049be0885a7b1fa0241456c8de8e0a6c17d"); // main genesis block
+uint256 hashGenesisBlock("0x"); // TODO main genesis block
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Trollcoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2725,7 +2725,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x"); //TODO test genesis block
+        hashGenesisBlock = uint256("0x3253fb71590b512cfd0ee71002623842bf5441d0331c2d289cc0549589619e8f"); //TODO test genesis block
     }
 
     //
@@ -2765,13 +2765,13 @@ bool InitBlockIndex() {
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
         block.nBits    = 0x1e0ffff0;
-        block.nTime    = 1388551968; // main epoch
-        block.nNonce   = 2958312; //TODO main nonce
+        block.nTime    = 0; // TODO main epoch
+        block.nNonce   = 0; //TODO main nonce
 
         if (fTestNet)
         {
-            block.nTime    = 1388464184; // test epoch
-            block.nNonce   = 0; //TODO test nonce
+            block.nTime    = 1388869261; // TODO test epoch
+            block.nNonce   = 2446821; //TODO test nonce
         }
 
         //// debug print
@@ -2783,7 +2783,7 @@ bool InitBlockIndex() {
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
 	printf("%s\n", "--- END BLOCK ---"); // TODO remove
 
-        assert(block.hashMerkleRoot == uint256("0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9")); // merkle root
+        assert(block.hashMerkleRoot == uint256("0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9")); // TODO merkle root
 
 	// START
 
