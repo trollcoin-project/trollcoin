@@ -27,7 +27,6 @@ apt-get install qt4-qmake libqt4-dev build-essential libboost-dev libboost-syste
 apt-get install libboost-all-dev
 apt-get install libdb4.8-dev
 apt-get install libdb++-dev
-apt-get install git
 
 echo 'Building trollcoind'
 cd $SCRIPTDIR/src
