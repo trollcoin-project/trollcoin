@@ -29,9 +29,6 @@ apt-get install libdb4.8-dev
 apt-get install libdb++-dev
 apt-get install git
 
-echo 'Downloading source...'
-git clone https://github.com/trollcoin-project/trollcoin.git
-
 echo 'Building trollcoind'
 cd $SCRIPTDIR/src
 make -f makefile.unix
