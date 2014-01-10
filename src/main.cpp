@@ -18,6 +18,20 @@
 using namespace std;
 using namespace boost;
 
+// Coin variables
+
+bool generateGenesisBlock = false;
+
+string merkleRoot = "0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9";
+
+int mainEpoch = 0;
+int mainNonce = 0;
+string mainGenesisBlock = "0x";
+
+int testEpoch = 1388869261;
+int testNonce = 2446821;
+string testGenesisBlock = "0x3253fb71590b512cfd0ee71002623842bf5441d0331c2d289cc0549589619e8f";
+
 //
 // Global state
 //
@@ -31,7 +45,7 @@ CTxMemPool mempool;
 unsigned int nTransactionsUpdated = 0;
 
 map<uint256, CBlockIndex*> mapBlockIndex;
-uint256 hashGenesisBlock("0x"); // TODO main genesis block
+uint256 hashGenesisBlock(mainGenesisBlock);
 static CBigNum bnProofOfWorkLimit(~uint256(0) >> 20); // Trollcoin: starting difficulty is 1 / 2^12
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -2725,7 +2739,7 @@ bool LoadBlockIndex()
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
         pchMessageStart[3] = 0xdc;
-        hashGenesisBlock = uint256("0x3253fb71590b512cfd0ee71002623842bf5441d0331c2d289cc0549589619e8f"); //TODO test genesis block
+        hashGenesisBlock = uint256(testGenesisBlock);
     }
 
     //
@@ -2765,13 +2779,13 @@ bool InitBlockIndex() {
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
         block.nBits    = 0x1e0ffff0;
-        block.nTime    = 0; // TODO main epoch
-        block.nNonce   = 0; //TODO main nonce
+        block.nTime    = mainEpoch;
+        block.nNonce   = mainNonce;
 
         if (fTestNet)
         {
-            block.nTime    = 1388869261; // TODO test epoch
-            block.nNonce   = 2446821; //TODO test nonce
+            block.nTime    = testEpoch;
+            block.nNonce   = testNonce;
         }
 
         //// debug print
@@ -2783,11 +2797,11 @@ bool InitBlockIndex() {
         printf("%s\n", block.hashMerkleRoot.ToString().c_str());
 	printf("%s\n", "--- END BLOCK ---"); // TODO remove
 
-        assert(block.hashMerkleRoot == uint256("0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9")); // TODO merkle root
+        assert(block.hashMerkleRoot == uint256(merkleRoot));
 
 	// START
 
-        if (false) // && block.GetHash() != hashGenesisBlock
+        if (generateGenesisBlock) // && block.GetHash() != hashGenesisBlock
         {
             printf("Searching for genesis block...\n");
             // This will figure out a valid hash and Nonce if you're
@@ -2850,8 +2864,6 @@ bool InitBlockIndex() {
         } catch(std::runtime_error &e) {
             return error("LoadBlockIndex() : failed to initialize block database: %s", e.what());
         }
-
-	printf("%s\n", "IT'S GOOOOOOOOOOOOOOOD"); // TODO remove
     }
 
     return true;
