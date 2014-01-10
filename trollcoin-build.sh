@@ -3,7 +3,7 @@
 # Easy build script for Ubuntu 12.04+
 # Tested on 32- and 64-bit Ubuntu, freshly installed from LiveCD with package updates
 
-# Usage: ./trollcoin-install.sh
+# Usage: ./trollcoin-build.sh
 
 # If you get the superuser permissions error, run again w/ sudo
 
