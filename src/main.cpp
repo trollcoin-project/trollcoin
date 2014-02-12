@@ -20,7 +20,7 @@ using namespace boost;
 
 // Coin variables
 
-bool generateGenesisBlock = true;
+bool generateGenesisBlock = false;
 
 string merkleRoot = "0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9";
 
