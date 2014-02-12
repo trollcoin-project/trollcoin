@@ -20,17 +20,17 @@ using namespace boost;
 
 // Coin variables
 
-bool generateGenesisBlock = false;
+bool generateGenesisBlock = true;
 
 string merkleRoot = "0x1c0d8e982961462d48e5331eb14b62989085dfa82465a36c0b1a72f27973c1a9";
 
-int mainEpoch = 0;
-int mainNonce = 0;
-string mainGenesisBlock = "0x";
+int mainEpoch = 1392172541;
+int mainNonce = 338369;
+string mainGenesisBlock = "0x3e368bf4d29d5d7711b6fc279b8de457d0c4044a08fa649ba79289e9f20611d3";
 
-int testEpoch = 1388869261;
-int testNonce = 2446821;
-string testGenesisBlock = "0x3253fb71590b512cfd0ee71002623842bf5441d0331c2d289cc0549589619e8f";
+int testEpoch = 0;
+int testNonce = 0;
+string testGenesisBlock = "0x";
 
 //
 // Global state
@@ -1075,21 +1075,31 @@ uint256 static GetOrphanRoot(const CBlockHeader* pblock)
     return pblock->GetHash();
 }
 
-int64 static GetBlockValue(int nHeight, int64 nFees)
-{
-    int64 nSubsidy = 100 * COIN; // 100 reward per block
-
-    // Subsidy is halved about every 4 years (every 2,102,400 blocks)
-    int split = 4 * 365 * 24 * 60;
-    nSubsidy >>= (nHeight / split); // Trollcoin: 2,102,400 blocks blocks in ~4 years
-    // this will result in 420,480,000 total TRC
-
-    return nSubsidy + nFees;
-}
-
 static const int64 nTargetTimespan = 4 * 60 * 60; // Trollcoin: 4 hr diffuculty retargets
 static const int64 nTargetSpacing = 60; // Trollcoin: 1 min blocks
 static const int64 nInterval = nTargetTimespan / nTargetSpacing;
+
+int64 static GetBlockValue(int nHeight, int64 nFees)
+{
+    // Logarithmic decay formula smooths the curve of the reduction of blocks' rewards and prevents economic shock
+    // It implements the equation Pe^(rt), with r defined as ln(1/2)/halfLife
+
+    // I have calculated the following information based on the current parameters:
+    // The total TRC produced will be 454968357.54966160 (~455 million)
+    // Block at height 104760325 (~200 years) will be the first to provide no subsidy other than transaction fees
+
+    // Total coin production is different than the indefinite integral from 0 to infinity of the equation because of Satoshi rounding to 8 decimals
+    // The above values took this rounding into account
+
+    double initialReward = 100.0; // first block is worth 100 TRC
+    double halfLife = 6 * ((60 * 60 * 24 * 365) / nTargetSpacing); // 6 years at a block per nTargetSpacing seconds
+
+    double result = initialReward * exp((log(0.5)) / (halfLife)) * (nHeight); // P(e)^((ln(1/2)/(h))(x)) where h is the half-life and x is the block height
+
+    int64 nSubsidy = ((int64) result) * COIN; // truncates decimals more precise than a Satoshi
+
+    return nSubsidy + nFees;
+}
 
 //
 // minimum amount of work that could possibly be required nTime after
