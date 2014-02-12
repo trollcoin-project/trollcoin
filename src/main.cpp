@@ -1098,7 +1098,7 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
 
     int64 nSubsidy = (int64) (result * COIN); // truncates decimals more precise than a Satoshi
 
-    printf("getBlockValue() at %i: %f before, %lld after\n", nHeight, result, nSubsidy);
+    //printf("getBlockValue() at %i: %f before, %lld after\n", nHeight, result, nSubsidy);
 
     return nSubsidy + nFees;
 }
