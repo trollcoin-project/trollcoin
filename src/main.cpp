@@ -1094,9 +1094,11 @@ int64 static GetBlockValue(int nHeight, int64 nFees)
     double initialReward = 100.0; // first block is worth 100 TRC
     double halfLife = 6 * ((60 * 60 * 24 * 365) / nTargetSpacing); // 6 years at a block per nTargetSpacing seconds
 
-    double result = initialReward * exp((log(0.5)) / (halfLife)) * (nHeight); // P(e)^((ln(1/2)/(h))(x)) where h is the half-life and x is the block height
+    double result = initialReward * exp(((log(0.5)) / (halfLife)) * (nHeight)); // P(e)^((ln(1/2)/(h))(x)) where h is the half-life and x is the block height
 
-    int64 nSubsidy = ((int64) result) * COIN; // truncates decimals more precise than a Satoshi
+    int64 nSubsidy = (int64) (result * COIN); // truncates decimals more precise than a Satoshi
+
+    printf("getBlockValue() at %i: %f before, %lld after\n", nHeight, result, nSubsidy);
 
     return nSubsidy + nFees;
 }
