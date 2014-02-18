@@ -272,9 +272,9 @@ class CBitcoinAddress : public CBase58Data
 public:
     enum
     {
-        PUBKEY_ADDRESS = 26, // tbh I have no idea what this will do but I hope trollcoin address start with a 'T'
+        PUBKEY_ADDRESS = 65, // Trollcoin mainnet address start with a 'T'
         SCRIPT_ADDRESS = 5,
-        PUBKEY_ADDRESS_TEST = 111,
+        PUBKEY_ADDRESS_TEST = 127, // Trollcoin testnet address start with a 't'
         SCRIPT_ADDRESS_TEST = 196,
     };
 
