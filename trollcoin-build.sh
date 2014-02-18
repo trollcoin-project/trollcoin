@@ -16,10 +16,10 @@ SCRIPTDIR=$(dirname "$SCRIPTLOCATION")
 SCRIPTUSER=$SUDO_USER
 
 if [[ $EUID -ne 0 ]]; then
-   echo "You must have superuser permissions to build trollcoin"
+   echo "You must have superuser permissions to build trollcoin!"
    exit 100
 else
-   echo "Superuser check passed"
+   echo "Superuser check passed!"
 fi
 
 echo 'Installing dependencies...'
@@ -27,16 +27,16 @@ apt-get -y update
 apt-get -y install qt4-qmake libqt4-dev build-essential libboost-all-dev libboost-dev libboost-system-dev libboost-filesystem-dev libboost-program-options-dev libboost-thread-dev libssl-dev libminiupnpc-dev
 apt-get -y install libdb4.8-dev libdb++-dev
 
-echo 'Building trollcoind'
+echo 'Building trollcoind...'
 cd $SCRIPTDIR/src
 make -f makefile.unix
 
-echo 'Building trollcoin-qt'
+echo 'Building trollcoin-qt...'
 cd $SCRIPTDIR
 qmake
 make
 
-echo 'Setting file permissions'
+echo 'Setting file permissions...'
 chown -R $SCRIPTUSER *
 
 echo 'Done!'
