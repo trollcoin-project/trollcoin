@@ -13,6 +13,7 @@
 
 SCRIPTLOCATION=$(readlink -f "$0")
 SCRIPTDIR=$(dirname "$SCRIPTLOCATION")
+SCRIPTUSER=$SUDO_USER
 
 if [[ $EUID -ne 0 ]]; then
    echo "You must have superuser permissions to build trollcoin"
@@ -34,5 +35,8 @@ echo 'Building trollcoin-qt'
 cd $SCRIPTDIR
 qmake
 make
+
+echo 'Setting file permissions'
+chown -R $SCRIPTUSER *
 
 echo 'Done!'
