@@ -31,4 +31,7 @@ qrc_*.cpp
 .DS_Store
 build
 
+# Auto-build script
+dist
+
 !src/leveldb-*/Makefile

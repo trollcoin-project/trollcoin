@@ -8,8 +8,7 @@
 # If you get the superuser permissions error, run again w/ sudo
 
 # If build is successful:
-# trollcoin-qt (GUI) is located in ./trollcoin/
-# trollcoind (command line) is located in ./trollcoin/src/
+# trollcoin-qt (GUI) and trollcoind (command line) are located in /dist/
 
 SCRIPTLOCATION=$(readlink -f "$0")
 SCRIPTDIR=$(dirname "$SCRIPTLOCATION")
@@ -35,6 +34,11 @@ echo 'Building trollcoin-qt...'
 cd $SCRIPTDIR
 qmake
 make
+
+echo 'Moving binaries...'
+mkdir dist
+mv -f src/trollcoind dist
+mv -f trollcoin-qt dist
 
 echo 'Setting file permissions...'
 chown -R $SCRIPTUSER *
