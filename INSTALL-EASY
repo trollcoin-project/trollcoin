@@ -1,0 +1,11 @@
+If you're running Ubuntu 12.04+, Trollcoin includes an easy-build script!
+
+[Commands to build Trollcoin]
+git clone https://github.com/trollcoin-project/trollcoin.git
+cd trollcoin
+sudo ./trollcoin-build.sh
+
+It's that easy!
+When the script is done, you can run Trollcoin by double-clicking 'trollcoin-qt' in the /trollcoin/dist/ folder!
+
+For advanced users, the command-line tool (trollcoind) is also included in this folder.
